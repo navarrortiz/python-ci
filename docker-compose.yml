@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - '9379:6379'
+
+  # Commented until we migrate live environments to RabbitMQ
+  # rabbitmq:
+  #   image: rabbitmq:3-management
+  #   ports:
+  #     - '9672:5672'
+  #     - '15672:15672'
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: dopple
+  #     RABBITMQ_DEFAULT_PASS: dopple
+
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/local/Dockerfile
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    env_file:
+      - ./.env
+    environment:
+#      DATABASE_URL: postgres://dopple:dopple@postgres/dopple
+      REDIS_URL: redis://redis:6379/0
+      DOPPLE_API_V1_URL: http://laravel:8181
+      USE_DEBUG_TOOLBAR: 'True'
+    restart: on-failure
+
+volumes:
+  db-data:
+  laravel-db-data:
