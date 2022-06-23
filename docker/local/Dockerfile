@@ -1,4 +1,4 @@
-FROM python:3.10.4-alpine
+FROM python:3.10.5-alpine
 
 ENV PYTHONUNBUFFERED 1
 
@@ -15,15 +15,10 @@ RUN apk update \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
   && apk add postgresql-client \
   # Rust dependencies
-  && apk add openssl-dev cargo \
-  && apk add make \
-  && apk add --no-cache build-base
+  && apk add openssl-dev cargo
 
-RUN pip install --upgrade pip setuptools
-
-RUN pip install gevent
-
-RUN PIP_NO_CACHE_DIR=false pip install 'poetry==1.1.4' --no-cache-dir
+RUN pip install --upgrade pip
+RUN PIP_NO_CACHE_DIR=false pip install 'poetry' --no-cache-dir
 RUN poetry config virtualenvs.create false
 
 COPY pyproject.toml .
