@@ -19,6 +19,12 @@ include = '\.pyi?$'
 line-length = 120
 target-version = ['py310']
 
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+ignore_missing_imports = true
+
 [tool.poetry]
 authors = ["Dopple <info@thedopple.com>"]
 description = "Backend for Dopple"
@@ -27,7 +33,7 @@ version = "0.0.0"
 
 [tool.poetry.dependencies]
 Django = ">=4,<5"
-Pillow = ">=6.2.2,<7"
+Pillow = "==6.2.2"
 ShopifyAPI = "==11.0.0"
 appoptics-apm = "*"
 boto3 = "1.23.4"
@@ -60,6 +66,7 @@ drf-nested-routers = "*"
 gevent = "^21.12.0"
 gunicorn = "==20.0.4"
 holidays = "*"
+importlib-metadata = "==3.3.0"
 ipython = "<7.17.0"
 klaviyo = "==2.0.4"
 kombu = ">=5.2.2,<6.0"
@@ -67,7 +74,7 @@ kount-ris-sdk = "==3.0.2"
 pdfrw = "*"
 psycopg2 = "~=2.8.3"
 pylibmc = "*"
-python = "3.10.4"
+python = "3.10.5"
 python-binary-memcached = "*"
 python-dateutil = "==2.7.3"
 python-decouple = "==3.1"
@@ -75,7 +82,7 @@ python-jose = "3.3.0"
 pytz = "==2020.4"
 redis = ">=3.2.0"
 requests = ">=2.20.0"
-sentry-sdk = "==1.5.10"
+sentry-sdk = "^1.5.12"
 shippo = "2.1.2"
 shortid = "*"
 simplejson = "==3.16.0"
@@ -97,6 +104,7 @@ types-python-dateutil = "^2.8.12"
 django-picklefield = "^3.0.1"
 django-waffle = "^2.4.1"
 greenlet = "^1.1.2"
+django-silk = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"
@@ -118,3 +126,4 @@ requests-mock = "*"
 Werkzeug = "<2.1"
 click = "==8.0.2"
 django-upgrade = "^1.7.0"
+isort = "^5.10.1"
